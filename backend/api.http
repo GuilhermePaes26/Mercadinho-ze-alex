@@ -1,0 +1,43 @@
+### Listar todos os produtos
+GET http://localhost:4000/produtos
+
+### Criar um novo produto
+POST http://localhost:4000/produtos
+Content-Type: application/json
+
+{
+    "name": "Produto Teste",
+    "price": 10.99,
+    "stock": 100
+}
+
+### Buscar um produto pelo ID
+GET http://localhost:4000/produtos/5
+
+### Atualizar um produto pelo ID
+PUT http://localhost:4000/produtos/3
+Content-Type: application/json
+
+{
+    "name": "Produto Atualizado",
+    "price": 10.00,
+    "stock": 90
+}
+
+### Deletar um produto pelo ID
+DELETE http://localhost:3000/produtos/1
+
+###
+POST http://localhost:4000/carrinho/adicionar
+Content-Type: application/json
+
+[
+  {
+    "productId":3,
+    "quantity": 10
+  },
+  {
+    "productId": 5,
+    "quantity": 3
+  }
+]

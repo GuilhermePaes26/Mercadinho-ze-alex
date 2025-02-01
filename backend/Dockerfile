@@ -1,25 +1,41 @@
-# Use a imagem Node.js como base
-FROM node:18
+# syntax=docker/dockerfile:1
 
-# Define o diretório de trabalho dentro do container
-WORKDIR /app
+ARG NODE_VERSION=18
 
-# Copia os arquivos do projeto para o container
-COPY package*.json ./
-COPY tsconfig*.json ./
+FROM node:${NODE_VERSION}-alpine as base
+
+WORKDIR /usr/src/app
+
+FROM base as deps
+
+COPY package.json package-lock.json ./
+
+RUN npm ci --omit=dev
+
+FROM base as build
+
+COPY package.json package-lock.json ./
 COPY prisma ./prisma
 
-# Instala as dependências
-RUN npm install
+RUN npm ci
 
-# Copia o restante dos arquivos
 COPY . .
 
-# Gera o cliente do Prisma
 RUN npx prisma generate
 
-# Expõe a porta usada pelo NestJS
+RUN npm run build
+
+FROM base as final
+
+ENV NODE_ENV=production
+
+USER node
+
+COPY --from=deps /usr/src/app/node_modules ./node_modules
+COPY --from=build /usr/src/app/dist ./dist
+COPY --from=build /usr/src/app/node_modules/.prisma ./node_modules/.prisma
+COPY package.json .
+
 EXPOSE 3000
 
-# Comando para iniciar o servidor
-CMD ["npm", "run", "start:dev"]
+CMD ["node", "dist/main"]
