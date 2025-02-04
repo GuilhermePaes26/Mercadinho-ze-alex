@@ -1,0 +1,23 @@
+<h2>Lista de Produtos</h2>
+<input
+  type="text"
+  [(ngModel)]="searchTerm"
+  placeholder="Pesquisar produto..."
+/>
+<ul *ngIf="searchTerm">
+  <li *ngFor="let product of filteredProducts()">
+    {{ product.name }} - {{ product.price | currency }}
+    <input
+      type="number"
+      [(ngModel)]="product.quantity"
+      placeholder="Quantidade"
+      min="1"
+    />
+    <button (click)="addToCart(product, product.quantity || 1)">
+      Adicionar ao Carrinho
+    </button>
+  </li>
+</ul>
+<br />
+<br />
+<button (click)="finalizePurchase()">Finalizar Compra</button>

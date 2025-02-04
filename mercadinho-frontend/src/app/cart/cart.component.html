@@ -1,0 +1,9 @@
+<h2>Carrinho</h2>
+<ul>
+  <li *ngFor="let item of cartWithDetails">
+    {{ item.name }} - {{ item.quantity }} unidades - R$
+    {{ item.price * item.quantity | number : "1.2-2" }}
+  </li>
+  <strong>Total: R$ {{ totalPrice | number : "1.2-2" }}</strong>
+</ul>
+<p *ngIf="cartWithDetails.length === 0">O carrinho está vazio.</p>
