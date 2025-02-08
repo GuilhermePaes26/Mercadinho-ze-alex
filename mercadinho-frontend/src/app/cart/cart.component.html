@@ -4,6 +4,20 @@
     {{ item.name }} - {{ item.quantity }} unidades - R$
     {{ item.price * item.quantity | number : "1.2-2" }}
   </li>
+  <br />
   <strong>Total: R$ {{ totalPrice | number : "1.2-2" }}</strong>
+  <br />
+  <br />
+  <strong>Troco Recebido:</strong>
+  <input
+    type="number"
+    [(ngModel)]="calculatedAmount"
+    placeholder="Insira o valor
+    recebido..."
+  />
+  <p *ngIf="calculatedAmount > 0">Troco: R$ {{ calculatedChange() }}</p>
 </ul>
+
+<br />
+<button (click)="finalizePurchase()">Finalizar Compra</button>
 <p *ngIf="cartWithDetails.length === 0">O carrinho está vazio.</p>

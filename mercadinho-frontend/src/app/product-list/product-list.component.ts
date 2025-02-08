@@ -51,14 +51,5 @@ export class ProductListComponent implements OnInit {
     };
     this.cartService.addToCart(item);
     this.cartService.addToCartWithDetails(itemDetails);
-    alert('Produto adicionado ao carrinho!');
-  }
-  finalizePurchase(): void {
-    const cartItems = this.cartService.getCartItems();
-    this.apiService.finalizePurchase(cartItems).subscribe((response: any) => {
-      console.log(response);
-      alert(`${response}`);
-      this.cartService.clearCart();
-    });
   }
 }
