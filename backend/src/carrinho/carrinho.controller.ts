@@ -13,7 +13,7 @@ export class CarrinhoController {
 
       const total = await this.produtoService.calculateCartTotal(data);
 
-      return `Carrinho atualizado! Total: R$ ${total.toFixed(2)}`;
+      return `Carrinho finalizado! Total: R$ ${total.toFixed(2)}`;
     } catch (error) {
       throw new Error("Erro ao atualizar carrinho: " + error.message);
     }

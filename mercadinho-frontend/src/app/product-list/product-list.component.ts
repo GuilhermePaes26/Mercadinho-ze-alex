@@ -41,8 +41,8 @@ export class ProductListComponent implements OnInit {
 
   addToCart(product: any, quantity: number): void {
     const item = {
-      id: product.id,
-      quantity,
+      productId: Number(product.id),
+      quantity: Number(quantity),
     };
     const itemDetails = {
       name: product.name,
@@ -56,7 +56,8 @@ export class ProductListComponent implements OnInit {
   finalizePurchase(): void {
     const cartItems = this.cartService.getCartItems();
     this.apiService.finalizePurchase(cartItems).subscribe((response: any) => {
-      alert(`${response.message} Total: R$ ${response.total}`);
+      console.log(response);
+      alert(`${response}`);
       this.cartService.clearCart();
     });
   }
