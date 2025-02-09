@@ -3,19 +3,29 @@
   type="text"
   [(ngModel)]="searchTerm"
   placeholder="Pesquisar produto..."
+  class="search-input"
 />
 <ul *ngIf="searchTerm">
-  <li *ngFor="let product of filteredProducts()">
-    {{ product.name }} - {{ product.price | currency }}
-    <input
-      type="number"
-      [(ngModel)]="product.quantity"
-      placeholder="Quantidade"
-      min="1"
-    />
-    <button (click)="addToCart(product, product.quantity || 1)">
-      Adicionar ao Carrinho
-    </button>
+  <li *ngFor="let product of filteredProducts()" class="product-item">
+    <div class="product-info">
+      <span class="product-name">{{ product.name }}</span> -
+      <span class="product-price">{{ product.price | currency }}</span>
+    </div>
+    <div class="product-actions">
+      <input
+        type="number"
+        [(ngModel)]="product.quantity"
+        placeholder="Quantidade"
+        min="1"
+        class="quantity-input"
+      />
+      <button
+        (click)="addToCart(product, product.quantity || 1)"
+        class="add-to-cart-btn"
+      >
+        Adicionar ao Carrinho
+      </button>
+    </div>
   </li>
 </ul>
-
+<app-cart></app-cart>

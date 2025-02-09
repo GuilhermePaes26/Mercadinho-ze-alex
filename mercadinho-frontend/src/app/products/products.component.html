@@ -1,0 +1,21 @@
+<button routerLink="/produtos/novo" class="add-product-btn">
+  Adicionar Produto
+</button>
+<h2 class="product-title">Lista de Produtos</h2>
+<input
+  type="text"
+  [(ngModel)]="searchTerm"
+  placeholder="Pesquisar produto..."
+  class="search-input"
+/>
+<br />
+<br />
+<ul *ngIf="searchTerm" class="product-list">
+  <li *ngFor="let product of filteredProducts()" class="product-item">
+    <span class="product-name">{{ product.name }}</span>
+    <button [routerLink]="['/produtos/edit', product.id]" class="edit-btn">
+      Editar
+    </button>
+    <button (click)="Excluir(product.id)" class="delete-btn">Excluir</button>
+  </li>
+</ul>

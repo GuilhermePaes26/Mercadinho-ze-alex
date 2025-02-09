@@ -1,0 +1,49 @@
+<h2 class="form-title">
+  {{ productId ? "Editar Produto" : "Adicionar Novo Produto" }}
+</h2>
+<form (ngSubmit)="saveProduct()" class="product-form">
+  <div class="form-group">
+    <label for="name">Nome do Produto:</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      [(ngModel)]="product.name"
+      required
+      placeholder="Digite o nome do produto"
+      class="form-input"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="price">Preço:</label>
+    <input
+      type="number"
+      id="price"
+      name="price"
+      [(ngModel)]="product.price"
+      required
+      placeholder="Digite o preço"
+      min="0"
+      class="form-input"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="stock">Estoque:</label>
+    <input
+      type="number"
+      id="stock"
+      name="stock"
+      [(ngModel)]="product.stock"
+      required
+      placeholder="Digite a quantidade em estoque"
+      min="0"
+      class="form-input"
+    />
+  </div>
+
+  <button type="submit" class="submit-btn">
+    {{ productId ? "Salvar Alterações" : "Adicionar Produto" }}
+  </button>
+</form>

@@ -1,23 +1,38 @@
 <h2>Carrinho</h2>
-<ul>
-  <li *ngFor="let item of cartWithDetails">
-    {{ item.name }} - {{ item.quantity }} unidades - R$
-    {{ item.price * item.quantity | number : "1.2-2" }}
-  </li>
-  <br />
-  <strong>Total: R$ {{ totalPrice | number : "1.2-2" }}</strong>
-  <br />
-  <br />
-  <strong>Troco Recebido:</strong>
-  <input
-    type="number"
-    [(ngModel)]="calculatedAmount"
-    placeholder="Insira o valor
-    recebido..."
-  />
-  <p *ngIf="calculatedAmount > 0">Troco: R$ {{ calculatedChange() }}</p>
-</ul>
+<div class="cart-container">
+  <ul class="cart-list">
+    <li *ngFor="let item of cartWithDetails" class="cart-item">
+      <div class="product-info">
+        <span class="product-name">{{ item.name }}</span> -
+        <span class="product-quantity">{{ item.quantity }} unidades</span> -
+        <span class="product-price"
+          >R$ {{ item.price * item.quantity | number : "1.2-2" }}</span
+        >
+      </div>
+    </li>
+  </ul>
 
-<br />
-<button (click)="finalizePurchase()">Finalizar Compra</button>
-<p *ngIf="cartWithDetails.length === 0">O carrinho está vazio.</p>
+  <div class="total-container">
+    <strong>Total: R$ {{ totalPrice | number : "1.2-2" }}</strong>
+  </div>
+
+  <div class="payment-container">
+    <strong>Troco Recebido:</strong>
+    <input
+      type="number"
+      [(ngModel)]="calculatedAmount"
+      placeholder="Insira o valor recebido..."
+      class="input-money"
+    />
+    <p *ngIf="calculatedAmount > 0" class="change-amount">
+      Troco: R$ {{ calculatedChange() }}
+    </p>
+  </div>
+
+  <button (click)="finalizePurchase()" class="finalize-btn">
+    Finalizar Compra
+  </button>
+  <p *ngIf="cartWithDetails.length === 0" class="empty-cart">
+    O carrinho está vazio.
+  </p>
+</div>

@@ -33,5 +33,7 @@ export class CartService {
   clearCart(): void {
     this.cartItems = [];
     this.cartSubject.next(this.cartItems);
+    this.cartWithDetails = [];
+    this.cartSubject.next(this.cartWithDetails);
   }
 }

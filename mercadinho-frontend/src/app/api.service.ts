@@ -13,6 +13,22 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/produtos`);
   }
 
+  getProductsById(productId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/produtos/${productId}`);
+  }
+
+  ExcluirProducts(productId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/produtos/${productId}`);
+  }
+
+  addProduct(product: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/produtos`, product);
+  }
+
+  editProduct(product: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/produtos/${product.id}`, product);
+  }
+
   finalizePurchase(
     items: { productId: number; quantity: number }[]
   ): Observable<any> {

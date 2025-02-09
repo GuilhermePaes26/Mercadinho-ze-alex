@@ -27,16 +27,16 @@ services:
     depends_on:
       - db
 
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   container_name: mercadinho-frontend
-  #   restart: always
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - backend
+  frontend:
+    build:
+      context: ./mercadinho-frontend
+      dockerfile: Dockerfile
+    container_name: mercadinho-frontend
+    restart: always
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
 
 volumes:
   db_data:

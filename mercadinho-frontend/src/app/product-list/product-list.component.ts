@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { CartService } from '../cart.service';
+import { CartComponent } from '../cart/cart.component';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, CartComponent],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
@@ -51,5 +52,6 @@ export class ProductListComponent implements OnInit {
     };
     this.cartService.addToCart(item);
     this.cartService.addToCartWithDetails(itemDetails);
+    product.quantity = null;
   }
 }
